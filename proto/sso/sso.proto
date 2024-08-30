@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "romanoff.sso.v1;ssov1";
+
+service Auth {
+    rpc Register (RegistrRequest) returns (RegisterResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+}
+
+message RegistrRequest {
+    string email = 1; // Email of the user to register
+    string password = 2; // Password of the user to register
+}
+
+message RegisterResponse {
+    int64 user_id = 1; // UID of the user to register
+}
+
+message LoginRequest {
+    string email = 1; // Email of the user to login
+    string password = 2; // Pasword of the user to login
+    int32 app_id = 3; // App_id of the my service id 
+}
+
+message LoginResponse {
+    string token = 1; // JWT token of the user to login 
+}
+
+message IsAdminRequest {
+    int64 user_id = 1; // id for admin
+}
+
+message IsAdminResponse {
+    bool is_admin = 1; // indicates whether the user is an admin
+}
+
